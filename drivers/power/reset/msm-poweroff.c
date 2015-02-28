@@ -290,6 +290,10 @@ static void msm_restart_prepare(const char *cmd)
 				(cmd != NULL && cmd[0] != '\0'));
 	}
 
+#ifdef CONFIG_MSM_PRESERVE_MEM
+	need_warm_reset = true;
+#endif
+
 #ifdef CONFIG_MACH_LEECO_DEBUG
 	pr_info("restart: warm reset is set to %d\n", need_warm_reset);
 #endif
