@@ -33,9 +33,6 @@
 
 #include <soc/qcom/smem.h>
 
-#ifdef CONFIG_MSM_SSR_MONITOR
-#include "ssr_monitor.h"
-#endif
 #include "peripheral-loader.h"
 
 #define XO_FREQ			19200000
@@ -807,11 +804,6 @@ static void log_failure_reason(const struct pil_tz_data *d)
 
 	strlcpy(reason, smem_reason, min(size, MAX_SSR_REASON_LEN));
 	pr_err("%s subsystem failure reason: %s.\n", name, reason);
-
-#ifdef CONFIG_MSM_SSR_MONITOR
-	/* Send subsystem failure reason to SSR monitor */
-	ssr_monitor_store_crashreason(reason);
-#endif
 
 	smem_reason[0] = '\0';
 	wmb();
